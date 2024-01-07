@@ -4,11 +4,6 @@
 
 local Util = require("lazyvim.util")
 local map = Util.safe_keymap_set
-local neogit = require("neogit")
 
-map("n", "<leader>gg", function()
-  neogit.open()
-end, { desc = "Open neogit" })
-map("n", "<leader>gG", function()
-  neogit.open()
-end, { desc = "Open neogit" })
+map("n", "<leader>gg", ":G<cr>", { desc = "Open fugitive" })
+map("n", "<leader>gG", ":G<cr>", { desc = "Open fugitive" })
