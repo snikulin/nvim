@@ -6,4 +6,3 @@ local Util = require("lazyvim.util")
 local map = Util.safe_keymap_set
 
 map("n", "<leader>gg", ":G<cr>", { desc = "Open fugitive" })
-map("n", "<leader>gG", ":G<cr>", { desc = "Open fugitive" })
