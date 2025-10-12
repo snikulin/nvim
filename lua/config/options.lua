@@ -24,6 +24,26 @@ vim.opt.signcolumn = "yes"     -- Always show sign column
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"  -- Use system clipboard
+if vim.fn.has("wsl") == 1 then
+  local has_clip = vim.fn.executable("clip.exe") == 1
+  local has_powershell = vim.fn.executable("powershell.exe") == 1
+
+  if has_clip and has_powershell then
+    local powershell_paste = [=[powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]=]
+    vim.g.clipboard = {
+      name = "WslClipboard",
+      copy = {
+        ["+"] = "clip.exe",
+        ["*"] = "clip.exe",
+      },
+      paste = {
+        ["+"] = powershell_paste,
+        ["*"] = powershell_paste,
+      },
+      cache_enabled = 0,
+    }
+  end
+end
 
 -- Performance
 vim.opt.updatetime = 300        -- Faster completion
